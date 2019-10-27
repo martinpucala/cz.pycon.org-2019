@@ -1,4 +1,5 @@
 from . import *
+import os
 
 DEBUG = True
 SECRET_KEY = 42
@@ -7,7 +8,7 @@ CSRF_COOKIE_SECURE = False
 SESSION_COOKIE_SECURE = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
-INTERNAL_IPS = ('127.0.0.1',)
+# INTERNAL_IPS = ('127.0.0.1',)
 
 CACHES = {
     'default': {

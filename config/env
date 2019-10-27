@@ -1,0 +1,5 @@
+# postgres
+PGHOST=db
+PGUSER=postgres
+PGPASSWORD=postgres
+PGDATABASE=postgres

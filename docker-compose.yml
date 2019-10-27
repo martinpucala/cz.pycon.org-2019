@@ -1,0 +1,36 @@
+version: '3.5'
+services:
+  pycon:
+    container_name: pycon-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /pycon
+    env_file: config/env
+    volumes:
+      - .:/pycon
+    networks:
+      - external
+      - internal
+    ports:
+      - '80:80'
+    depends_on:
+      - db
+    command: sh -c 'python3 manage.py migrate && echo Running server... && python3 manage.py runserver --settings=pyconcz.settings.local 0.0.0.0:80'
+  db:
+    container_name: pycon-postgres
+    image: postgres:12-alpine
+    restart: unless-stopped
+    env_file: config/env
+    networks:
+      - internal
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data:
+    name: pycon-postgres-data
+networks:
+  external:
+    name: pycon-external
+  internal:
+    name: pycon-internal
